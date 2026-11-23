@@ -9,6 +9,6 @@
  *   supabaseKey  ：anon public key 或 publishable key（可以公开的那个，千万不要填 service_role / secret key）
  */
 window.SITE_CONFIG = {
-  supabaseUrl: "",
-  supabaseKey: ""
+  supabaseUrl: "https://tdybhtpcnphzzbmtrvqu.supabase.co",
+  supabaseKey: "sb_publishable_togUPZSof8vQpiufzt2iAw_b5AyzEtv"
 };
