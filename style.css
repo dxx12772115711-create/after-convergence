@@ -651,35 +651,45 @@ body {
 
 /* 眨眼 */
 .crab-eyes {
-  transform-origin: 60px 21px;
+  transform-box: fill-box;
+  transform-origin: center;
   animation: crab-blink 4.5s infinite;
 }
 @keyframes crab-blink {
   0%, 92%, 100% { transform: scaleY(1); }
-  95% { transform: scaleY(.1); }
+  95% { transform: scaleY(.15); }
 }
 
-/* 钳子挥一挥 */
-.crab-claw-l { transform-origin: 34px 52px; animation: claw-l 3.2s ease-in-out infinite; }
-.crab-claw-r { transform-origin: 86px 52px; animation: claw-r 3.2s ease-in-out infinite; }
-@keyframes claw-l { 0%, 70%, 100% { transform: rotate(0); } 80% { transform: rotate(-14deg); } 90% { transform: rotate(4deg); } }
-@keyframes claw-r { 0%, 70%, 100% { transform: rotate(0); } 80% { transform: rotate(14deg); } 90% { transform: rotate(-4deg); } }
+/* 小手挥一挥（像素风：一格一格地跳） */
+.arm-l { animation: arm-wave 3.2s steps(1) infinite; }
+.arm-r { animation: arm-wave 3.2s steps(1) infinite .15s; }
+@keyframes arm-wave {
+  0%, 74%, 100% { transform: translateY(0); }
+  78%, 86% { transform: translateY(-9px); }
+  82%, 90% { transform: translateY(0); }
+}
 
-/* 说话时钳子开合、嘴巴动 */
-.talking .jaw { animation: jaw .28s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
-@keyframes jaw { to { translate: 0 3px; } }
-.talking .crab-mouth { animation: mouth .22s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center top; }
-@keyframes mouth { to { transform: scaleY(1.8); } }
+/* 说话时身体一蹦一蹦、小手挥舞 */
+.talking .crab-body { animation: bob .36s steps(1) infinite; }
+@keyframes bob { 50% { transform: translateY(-3px); } }
+.talking .arm { animation: arm-talk .36s steps(1) infinite; }
+.talking .arm-r { animation-delay: .18s; }
+@keyframes arm-talk { 50% { transform: translateY(-9px); } }
 
-.crab.hop .crab-svg { animation: hop .4s ease; }
-@keyframes hop { 40% { transform: translateY(-10px) rotate(-4deg); } }
+.crab.hop .crab-svg { animation: hop .4s steps(4); }
+@keyframes hop { 50% { transform: translateY(-10px); } }
 
-.crab-egg.dance .crab-svg { animation: dance .4s ease-in-out 4; }
+/* 141 隐藏彩蛋：横着走来走去 */
+.crab-egg.dance .crab-svg { animation: dance .5s steps(2) 3; }
+.crab-egg.dance .legs-a { animation: legs .25s steps(1) 6; }
+.crab-egg.dance .legs-b { animation: legs .25s steps(1) 6 .125s; }
+.crab-egg.dance .arm { animation: arm-talk .25s steps(1) 6; }
 @keyframes dance {
-  0%, 100% { transform: translateX(0) rotate(0); }
-  25% { transform: translateX(-10px) rotate(-8deg); }
-  75% { transform: translateX(10px) rotate(8deg); }
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-12px); }
+  75% { transform: translateX(12px); }
 }
+@keyframes legs { 50% { transform: translateY(-4px); } }
 
 /* 对话气泡 */
 .crab-bubble {
@@ -762,4 +772,33 @@ body {
 @media (max-width: 600px) {
   .crab-egg { right: 12px; }
   .crab { width: 72px; }
+}
+
+/* ---------- 小提示 & 加载状态 ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  z-index: 200;
+  max-width: calc(100vw - 40px);
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: rgba(43, 36, 32, .92);
+  color: var(--paper);
+  font-size: 14px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 12px);
+  transition: opacity .25s, transform .25s;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.cf-submit:disabled { opacity: .6; cursor: wait; }
+.comment-retry {
+  font: inherit;
+  color: var(--amber);
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  cursor: pointer;
 }

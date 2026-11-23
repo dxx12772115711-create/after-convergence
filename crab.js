@@ -16,37 +16,23 @@
   const BYE = "螃蟹要缩回去晒太阳啦，拜拜～ 🦀";
   const SECRET = "Task Force 141，出动！……啊不对，今天是休假日，大家去喝杯茶吧 ☕";
 
+  // 像素小螃蟹（参照 Claude Code 吉祥物 Clawd 的官方造型，自己一格一格画的）
+  // 每格 6×9，网格坐标 [x, y, 宽, 高]
+  const px = (list, cls, fill) =>
+    `<g class="${cls}" fill="${fill}">` +
+    list.map(([x, y, w, h]) => `<rect x="${x * 6}" y="${y * 9}" width="${w * 6}" height="${h * 9}"/>`).join("") +
+    `</g>`;
+  const C = "#d97757";
   const SVG = `
-<svg class="crab-svg" viewBox="0 0 120 92" aria-hidden="true">
-  <g class="crab-legs" stroke="#d4683a" stroke-width="4" stroke-linecap="round" fill="none">
-    <path d="M32 62 L16 70 L12 80"/><path d="M34 68 L22 78 L20 88"/><path d="M40 72 L32 84 L32 91"/>
-    <path d="M88 62 L104 70 L108 80"/><path d="M86 68 L98 78 L100 88"/><path d="M80 72 L88 84 L88 91"/>
+<svg class="crab-svg" viewBox="0 -12 108 69" shape-rendering="crispEdges" aria-hidden="true">
+  ${px([[4, 4, 1, 1], [11, 4, 1, 1]], "legs-a", C)}
+  ${px([[6, 4, 1, 1], [13, 4, 1, 1]], "legs-b", C)}
+  ${px([[1, 2, 2, 1]], "arm arm-l", C)}
+  ${px([[15, 2, 2, 1]], "arm arm-r", C)}
+  <g class="crab-body">
+    ${px([[3, 0, 12, 1], [3, 1, 2, 1], [6, 1, 6, 1], [13, 1, 2, 1], [3, 2, 12, 2]], "body", C)}
+    ${px([[5, 1, 1, 1], [12, 1, 1, 1]], "crab-eyes", "#1f1a16")}
   </g>
-  <g class="crab-claw crab-claw-l">
-    <path d="M34 52 L20 40" stroke="#ee7d4b" stroke-width="5" stroke-linecap="round"/>
-    <g class="pincer">
-      <ellipse cx="14" cy="28" rx="10" ry="7" transform="rotate(-25 14 28)" fill="#ee7d4b"/>
-      <ellipse class="jaw" cx="20" cy="38" rx="7" ry="4.5" transform="rotate(15 20 38)" fill="#f08f5f"/>
-    </g>
-  </g>
-  <g class="crab-claw crab-claw-r">
-    <path d="M86 52 L100 40" stroke="#ee7d4b" stroke-width="5" stroke-linecap="round"/>
-    <g class="pincer">
-      <ellipse cx="106" cy="28" rx="10" ry="7" transform="rotate(25 106 28)" fill="#ee7d4b"/>
-      <ellipse class="jaw" cx="100" cy="38" rx="7" ry="4.5" transform="rotate(-15 100 38)" fill="#f08f5f"/>
-    </g>
-  </g>
-  <path d="M50 40 L47 24 M70 40 L73 24" stroke="#ee7d4b" stroke-width="4" stroke-linecap="round"/>
-  <ellipse cx="60" cy="58" rx="34" ry="22" fill="#ee7d4b"/>
-  <ellipse cx="60" cy="52" rx="24" ry="10" fill="#f39a6c" opacity=".55"/>
-  <g class="crab-eyes">
-    <circle cx="47" cy="21" r="8" fill="#fff"/><circle cx="73" cy="21" r="8" fill="#fff"/>
-    <circle cx="48" cy="22" r="4" fill="#2b2420"/><circle cx="74" cy="22" r="4" fill="#2b2420"/>
-    <circle cx="49.5" cy="20.3" r="1.4" fill="#fff"/><circle cx="75.5" cy="20.3" r="1.4" fill="#fff"/>
-  </g>
-  <ellipse cx="44" cy="62" rx="5" ry="3" fill="#ff6f7d" opacity=".45"/>
-  <ellipse cx="76" cy="62" rx="5" ry="3" fill="#ff6f7d" opacity=".45"/>
-  <path class="crab-mouth" d="M55 63 Q60 68 65 63" stroke="#2b2420" stroke-width="2.2" fill="none" stroke-linecap="round"/>
 </svg>`;
 
   const root = document.createElement("div");
