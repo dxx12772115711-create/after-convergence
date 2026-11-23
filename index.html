@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>收敛之后 · After Convergence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;900&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <p class="hero-kicker">After Convergence</p>
+    <h1 class="hero-title">收敛之后</h1>
+    <div class="hero-sub">
+      <p>这里是 <strong>@网格无关性验证</strong> 的小照片馆。</p>
+      <p>主要创作 <strong>Task Force 141</strong>：Ghost、Soap、Price、Gaz，和他们战场之外的日常。</p>
+    </div>
+    <ul class="hero-note">
+      <li>所有图片均由 GPT Image 2.6 生成，为同人创作，角色版权归原作所有。</li>
+      <li>参考素材只使用官方官网与官方图，不会使用其他画师或 Coser 的作品。</li>
+    </ul>
+  </header>
+
+  <nav class="filters" id="filters" aria-label="分类"></nav>
+
+  <main class="grid" id="grid"></main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> 收敛之后 · @网格无关性验证 · 同人创作，角色版权归原作所有</p>
+  </footer>
+
+  <!-- 作品详情弹窗 -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <article class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="storyTitle">
+      <button class="modal-close" data-close aria-label="关闭">×</button>
+      <div class="viewer">
+        <div class="viewer-stage">
+          <img id="viewerImg" alt="">
+          <button class="viewer-nav prev" id="prevImg" aria-label="上一张">‹</button>
+          <button class="viewer-nav next" id="nextImg" aria-label="下一张">›</button>
+        </div>
+        <div class="thumbs" id="thumbs"></div>
+      </div>
+      <div class="story" id="story"></div>
+    </article>
+  </div>
+
+  <script src="works.js"></script>
+  <script src="app.js"></script>
+  <script src="crab.js"></script>
+</body>
+</html>
